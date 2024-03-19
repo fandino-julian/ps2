@@ -19,3 +19,19 @@ identification=read.csv("~/Downloads/Modulo de identificacion/excel_identificaci
 #1.2 Exportar
 saveRDS(location, file="output/location.rds")
 saveRDS(identification, file="output/identification.rds")
+
+
+#2. Generar variables
+#2.1 
+identification$business_type <- factor(identification$GRUPOS4,
+                                       levels = c(1, 2, 3, 4),
+                                       labels = c("Agricultura", "Industria manufacturera",
+                                                  "Comercio", "Servicios"))
+
+# 2.2 Generar la variable 'grupo_etario'
+cortes_edad <- c(18, 30, 50, 70, Inf)
+nombres_grupos <- c("Joven", "Adulto", "Adulto mayor", "Anciano")
+identification$grupo_etario <- cut(identification$P241, breaks = cortes_edad, labels = nombres_grupos, include.lowest = TRUE)
+
+# 2.3 Generar la variable 'ambulante' en el objeto 'location'
+location$ambulante <- ifelse(location$P3053 %in% c(3, 4, 5), 1, 0)
