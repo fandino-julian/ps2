@@ -43,7 +43,9 @@ identification_sub <- identification[, c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA
 #3.2
 location_sub <- location[, c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA", "ambulante", "P3054", "P469", "COD_DEPTO", "F_EXP")]
 
-
+#4 Combinar base de datos
+#4.1 
+df_combined <- merge(location_sub, identification_sub, by = c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA"))
 
 
 
