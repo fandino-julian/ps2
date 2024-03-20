@@ -13,8 +13,8 @@ library(tidyverse)
 
 #1 Importar
 #1.1 Importar
-location=read.csv("~/Downloads/Modulo de sitio o ubicacion/excel_ubicacion.csv")
-identification=read.csv("~/Downloads/Modulo de identificacion/excel_identificacion.csv")
+location<-read.csv("~/Downloads/Modulo de sitio o ubicacion/excel_ubicacion.csv")
+identification<-read.csv("~/Downloads/Modulo de identificacion/excel_identificacion.csv")
 
 #1.2 Exportar
 saveRDS(location, file="output/location.rds")
@@ -31,7 +31,19 @@ identification$business_type <- factor(identification$GRUPOS4,
 # 2.2 Generar la variable 'grupo_etario'
 cortes_edad <- c(18, 30, 50, 70, Inf)
 nombres_grupos <- c("Joven", "Adulto", "Adulto mayor", "Anciano")
+
 identification$grupo_etario <- cut(identification$P241, breaks = cortes_edad, labels = nombres_grupos, include.lowest = TRUE)
 
 # 2.3 Generar la variable 'ambulante' en el objeto 'location'
 location$ambulante <- ifelse(location$P3053 %in% c(3, 4, 5), 1, 0)
+
+#3 Eliminar filas/columnas de un conjunto de datos
+#3.1
+identification_sub <- identification[, c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA", "grupo_etario","COD_DEPTO", "F_EXP")]
+#3.2
+location_sub <- location[, c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA", "ambulante", "P3054", "P469", "COD_DEPTO", "F_EXP")]
+
+
+
+
+
