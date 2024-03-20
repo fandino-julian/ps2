@@ -31,6 +31,7 @@ identification$business_type <- factor(identification$GRUPOS4,
 # 2.2 Generar la variable 'grupo_etario'
 cortes_edad <- c(18, 30, 50, 70, Inf)
 nombres_grupos <- c("Joven", "Adulto", "Adulto mayor", "Anciano")
+#se inicia desde los 18, debido aque el valor minimo es 18 y se pone desde 70 en adelante por lo que hay datos de 98 y 99 años
 
 identification$grupo_etario <- cut(identification$P241, breaks = cortes_edad, labels = nombres_grupos, include.lowest = TRUE)
 
@@ -46,6 +47,11 @@ location_sub <- location[, c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA", 
 #4 Combinar base de datos
 #4.1 
 df_combined <- merge(location_sub, identification_sub, by = c("DIRECTORIO", "SECUENCIA_P", "SECUENCIA_ENCUESTA"))
+
+
+#5 Descriptivas
+#5.1 
+resumen <- summary(df_combined)
 
 
 
