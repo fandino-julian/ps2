@@ -1,5 +1,6 @@
 #ps2
 ##Julian Fandiño_202021070##
+##https://github.com/fandino-julian/ps2.git
 R.version.string
 library(rio)
 install.packages("rio")
